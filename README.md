@@ -33,6 +33,6 @@
 2.  Установить PyCharm
 3.  Создать в PycharmProjects пустую директорию
 4.  Инициировать git (git init)
-5.  Скачать файлы из репозитория (git clone https://github.com/zheryulia/ moodle_tests)
+5.  Скачать файлы из репозитория (git clone https://github.com/zheryulia/ui_moodle_tests)
 6.  Открыть проект
 7.  Установить пакеты из файла requirements.txt (pip install -r requirements.txt)
