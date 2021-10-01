@@ -12,7 +12,7 @@ from pages.application import Application
 def app(request):
     url = request.config.getoption("--url")
     chrome_options = Options()
-    # chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--headless")
     fixture = Application(
         webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options),
         url,
