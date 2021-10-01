@@ -36,3 +36,4 @@
 5.  Скачать файлы из репозитория (git clone https://github.com/zheryulia/ui_moodle_tests)
 6.  Открыть проект
 7.  Установить пакеты из файла requirements.txt (pip install -r requirements.txt)
+8. Запустить -pytest
