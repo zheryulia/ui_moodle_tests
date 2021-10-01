@@ -1,4 +1,4 @@
-# Функциональные тесты для приложения Moodle – системы электронного обучения.
+# Функциональные тесты для приложения Moodle – системы электронного обучения
 
 [![Build Status](https://app.travis-ci.com/zheryulia/ui_moodle_tests.svg?branch=master)](https://app.travis-ci.com/zheryulia/ui_moodle_tests)
 
