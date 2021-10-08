@@ -49,22 +49,22 @@ def pytest_addoption(parser):
         default="true",
         help="'true' для режима без видимого браузера,\n"
         "'false' - для режима где браузер виден",
-    ),
-    parser.addoption(
-        "--url",
-        action="store",
-        default="https://qacoursemoodle.innopolis.university",
-        help="ссылка на qacourse",
-    )
-    parser.addoption(
-        "--login",
-        action="store",
-        default="yuliazher",
-        help="имя пользователя",
-    ),
-    parser.addoption(
-        "--password",
-        action="store",
-        default="Yul343!!",
-        help="пароль",
-    ),
+        ),
+        parser.addoption(
+            "--url",
+            action="store",
+            default="https://qacoursemoodle.innopolis.university",
+            help="ссылка на qacourse",
+        )
+            parser.addoption(
+            "--login",
+            action="store",
+            default="yuliazher",
+            help="имя пользователя",
+        ),
+        parser.addoption(
+            "--password",
+            action="store",
+            default="Yul343!!",
+            help="пароль",
+        )
