@@ -15,13 +15,11 @@ class Application:
         self.user_data = UserPage(self)
         self.user_data_page = UserDataPage(self)
 
-    def open_main_page(self):
-        self.driver.get(self.url)
-
     def quit(self):
         self.driver.quit()
 
     def open_auth_page(self):
         self.driver.get(self.url + "/login/index.php")
 
-
+    def open_create_course_page(self):
+        self.driver.get(self.url + "/course/edit.php")
