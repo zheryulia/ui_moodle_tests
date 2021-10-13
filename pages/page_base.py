@@ -15,7 +15,7 @@ class BasePage:
     def find_element(self, locator, wait_time=10):
         element = WebDriverWait(self.app.driver, wait_time).until(
             EC.presence_of_element_located(locator),
-            message=f"Can't find element by locator {locator}",
+            message=f"Не удается найти элемент по локатору {locator}",
         )
         return element
 
@@ -25,9 +25,28 @@ class BasePage:
     def select_value(self, select_element, value):
         select_element.select_by_value(value)
 
-    def find_select_element(self, locator):
-        select_element = Select(self.find_element(locator))
-        return select_element
+    def find_element_by_link_text(self, locator):
+        return WebDriverWait(self.app.driver, 20).until(
+            EC.visibility_of_element_located(locator)
+        )
+
+    def click_on_link(self, locator):
+        return (
+            WebDriverWait(self.app.driver, 20)
+            .until(EC.element_to_be_clickable(locator))
+            .click()
+        )
+
+    def click_on_button(self, locator):
+        return (
+            WebDriverWait(self.app.driver, 20)
+            .until(EC.visibility_of_element_located(locator))
+            .click()
+        )
+
+    @staticmethod
+    def set_value_select(element, value):
+        return Select(element).select_by_visible_text(value)
 
     @staticmethod
     def fill_element(element, text):
