@@ -34,7 +34,6 @@ class UserDataPage(BasePage):
         self.click_element(self.submit_button())
 
     def add_edit_user_data(self, data):
-
         self.add_input_city(data.city)
         self.save_user_data()
 
@@ -43,3 +42,7 @@ class UserDataPage(BasePage):
 
     def clear_email(self):
         self.clear_element(self.find_email_field())
+
+    def has_data_changed_alert(self):
+        """Сообщение что данные изменены"""
+        return len(self.find_elements(LocatorsPageUser.DATA_CHANGED_ALERT)) != 0
