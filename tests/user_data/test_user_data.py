@@ -3,6 +3,7 @@
 """
 
 import allure
+import pytest
 
 from models.user_data import UserData
 from models.auth import AuthData
