@@ -36,4 +36,28 @@
 5.  Скачать файлы из репозитория (git clone https://github.com/zheryulia/ui_moodle_tests)
 6.  Открыть проект
 7.  Установить пакеты из файла requirements.txt (pip install -r requirements.txt)
-8. Запустить -pytest
+
+# **Настройка pre-commit:**
+pre-commit установит хуки для проверки кода. Каждый раз, когда разработчик будет делать очередной commit будет проходить проверка созданного кода автоматическими линтерами.
+```
+pre-commit install
+```
+
+# **Запуск тестов**
+
+```
+pytest --headless=false --base-url=https://qacoursemoodle.innopolis.university
+```
+Параметры `--headless` - (по умолчанию true) запуск тестов в режиме без демонстрации браузера `--base-url` - адрес сайта для тестирования (по умолчанию https://qacoursemoodle.innopolis.university).
+
+#**Отчеты при помощи Allure:**
+
+1. Установить локально Allure commandline application (посмотреть инструкцию можно [здесь](https://docs.qameta.io/allure/))
+
+2. Перезапустить PyCharm
+
+3. Установить allure-pytest командой в терминале `pip install allure-pytest`
+
+4. Создать папку для загрузки временных результатов тестов и запустить тесты командой в терминале `pytest --alluredir reposts`
+
+5. Посмотреть отчет `allure serve allure_reports`
