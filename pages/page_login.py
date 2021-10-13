@@ -8,15 +8,7 @@ from locators.locators_page_login import LocatorsPageLogin
 
 
 class LoginPage(BasePage):
-
-    def email_input(self):
-        return self.find_element(LocatorsPageLogin.LOGIN)
-
-    def password_input(self):
-        return self.find_element(LocatorsPageLogin.PASSWORD)
-
-    def login_button(self):
-        return self.find_element(LocatorsPageLogin.LOGIN_BUTTON)
+    """Page to check login of users."""
 
     def is_auth(self):
         """Проверка, что вход был осуществлен."""
@@ -32,12 +24,30 @@ class LoginPage(BasePage):
             return True
         return False
 
-    def auth(self, data: AuthData):
-        self.fill_element(self.email_input(), data.login)
-        self.fill_element(self.password_input(), data.password)
-        self.click_element(self.login_button())
+    def check_personal_account(self):
+        return self.find_element(LocatorsPageLogin.PERSONAL_ACCOUNT)
+
+    def find_error_message(self):
+        return self.find_element(LocatorsPageLogin.LOGIN_ERRORMESSAGE)
+
+    def user_menu(self):
+        return self.find_element(LocatorsPageLogin.USER_MENU)
+
+    def user_menu_settings(self):
+        return self.find_element(LocatorsPageLogin.USER_MENU_SETTINGS)
+
+    def auth(self, data):
+        """Функция входа в личный кабинет."""
+
+        login = data.login
+        password = data.password
+        self.fill_element(self.find_element(LocatorsPageLogin.USERNAME), login)
+        self.fill_element(self.find_element(LocatorsPageLogin.PASSWORD), password)
+        self.click_element(self.find_element(LocatorsPageLogin.LOGIN_BUTTON))
 
     def sign_out(self):
+        """Выйти из системы."""
+
         if self.is_auth():
             self.click_element(self.find_element(LocatorsPageLogin.USER_MENU))
             self.click_element(self.find_element(LocatorsPageLogin.EXIT))
