@@ -13,5 +13,9 @@ class LocatorsUserMain:
 
 class LocatorsPageUser:
     CITY_INPUT = (By.ID, "id_city")
+    DATA_CHANGED_ALERT = (
+        By.XPATH,
+        "//div[@class='alert alert-success alert-block fade in ']",
+    )
     EMAIL = (By.ID, "id_email")
     SUBMIT_BUTTON = (By.ID, "id_submitbutton")
