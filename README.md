@@ -50,7 +50,7 @@ pytest --headless=false --base-url=https://qacoursemoodle.innopolis.university
 ```
 Параметры `--headless` - (по умолчанию true) запуск тестов в режиме без демонстрации браузера `--base-url` - адрес сайта для тестирования (по умолчанию https://qacoursemoodle.innopolis.university).
 
-#**Отчеты при помощи Allure:**
+# **Отчеты при помощи Allure:**
 
 1. Установить локально Allure commandline application (посмотреть инструкцию можно [здесь](https://docs.qameta.io/allure/))
 
