@@ -1,5 +1,4 @@
 import pytest
-
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
@@ -12,18 +11,18 @@ from pages.application import Application
 def app(request):
     """Фикстура для открытия браузера."""
 
-    url = request.config.getoption("--url")
+    base_url = request.config.getoption("--base-url")
     headless_type = request.config.getoption("--headless").lower()
-    if headless_type == "true":
+    if headless_type == "false":
         chrome_options = Options()
         chrome_options.add_argument("--headless")
         fixture = Application(
             webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options),
-            url,
+            base_url,
         )
     else:
         fixture = Application(
-            webdriver.Chrome(ChromeDriverManager().install()), url
+            webdriver.Chrome(ChromeDriverManager().install()), base_url
         )
     yield fixture
     # Чистим после себя
@@ -43,28 +42,16 @@ def auth(app, request):
 
 
 def pytest_addoption(parser):
-       parser.addoption(
+    parser.addoption(
         "--headless",
         action="store",
-        default="true",
+        default="false",
         help="'true' для режима без видимого браузера,\n"
         "'false' - для режима где браузер виден",
-        ),
-        parser.addoption(
-            "--url",
-            action="store",
-            default="https://qacoursemoodle.innopolis.university",
-            help="ссылка на qacourse",
-        )
-            parser.addoption(
-            "--login",
-            action="store",
-            default="yuliazher",
-            help="имя пользователя",
-        ),
-        parser.addoption(
-            "--password",
-            action="store",
-            default="Yul343!!",
-            help="пароль",
-        )
+    ),
+    parser.addoption(
+        "--base-url",
+        action="store",
+        default="https://qacoursemoodle.innopolis.university",
+        help="url сайта для тестирования",
+    )
