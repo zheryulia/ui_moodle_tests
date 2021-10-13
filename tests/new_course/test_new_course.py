@@ -1,13 +1,17 @@
+"""
+Тесты на создание новых курсов.
+"""
+
+import allure
 import pytest
 
-from models.course import CreateCourse
+from models.course import NewCourse
 from models.auth import AuthData
 
 
 class TestAddNewCourse:
-    """Adding new courses."""
 
-    @pytest.mark.xfail
+    @allure.story("Позитивный тест")
     def test_valid_course_creation(self, app):
         """
         Предусловие:
@@ -25,23 +29,29 @@ class TestAddNewCourse:
         1. Курс успешно создан.
         """
         app.open_auth_page()
-        data = AuthData.random()
+        data = AuthData(login="yuliazher", password="Yul343!!")
         app.login.auth(data)
         app.open_create_course_page()
-        course_info = CreateCourse.random()
-        app.create_course.create_course(course_info)
+        full_name_field = app.course_edit.find_full_name_field()
+        full_name = NewCourse.random().full_name
+        app.course_edit.fill_element(full_name_field, full_name)
+        short_name_field = app.course_edit.find_short_name_field()
+        short_name = NewCourse.random().short_name
+        app.course_edit.fill_element(short_name_field, short_name)
+        app.course_edit.submit_changes()
+        with allure.step("Проверяем позитивный кейс создания нового курса"):
+            app.open_mng_course_page()
+            search_field = app.course_mng.find_search_field()
+            app.course_mng.fill_element(search_field, full_name)
+            app.course_mng.click_on_search_button()
+            assert app.course_mng.search_result()
+        app.course_mng.find_course_name(full_name)
+        app.course_mng.click_delete_icon()
+        app.course_del.confirm_delete()
+        app.login.sign_out()
 
-    @pytest.mark.xfail
-    @pytest.mark.parametrize(
-        "full_course_name, short_course_name",
-        [
-            [CreateCourse.random().full_course_name, None],
-            [None, CreateCourse.random().short_course_name],
-        ],
-    )
-    def test_invalid_course_creation(
-        self, app, full_course_name, short_course_name
-    ):
+    @allure.story("Негативный тест")
+    def test_invalid_course_creation(self, app):
         """
         Предусловие:
         1. У пользователя, под которым вы авторизуетесь, есть права администратора
@@ -58,10 +68,13 @@ class TestAddNewCourse:
         1. Отображается предупреждение.
         """
         app.open_auth_page()
-        data = AuthData.random()
+        data = AuthData(login="yuliazher", password="Yul343!!")
         app.login.auth(data)
         app.open_create_course_page()
-        course_info = CreateCourse.random()
-        setattr(course_info, "full_course_name", full_course_name)
-        setattr(course_info, "short_course_name", short_course_name)
-        app.create_course.create_course(course_info)
+        full_name_field = app.course_edit.find_full_name_field()
+        full_name = NewCourse.random().full_name
+        app.course_edit.fill_element(full_name_field, full_name)
+        app.course_edit.submit_changes()
+        with allure.step("Проверяем негативный кейс создания нового курса"):
+            assert app.course_edit.find_error_message_about_short_name()
+        app.login.sign_out()
